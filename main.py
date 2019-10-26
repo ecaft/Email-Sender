@@ -6,8 +6,16 @@ from email.mime.multipart import MIMEMultipart
 
 from email.mime.text import MIMEText
 
-myaddress="example@email.com"
-password="password"
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("email")
+parser.add_argument("password")
+args = parser.parse_args()
+
+myaddress=args.email
+password=args.password
+
 def get_contacts(filename):
     name = []
     emails = []
@@ -26,7 +34,7 @@ def main():
     names, emails=get_contacts('mycontacts.txt')
     message_template=read_template("message.txt")
 
-    s=smtplib.SMTP(host='smtp.gmail.com',port=587)
+    s=smtplib.SMTP(host='smtp-mail.outlook.com',port=587)
     s.starttls()
     s.login(myaddress,password)
 
